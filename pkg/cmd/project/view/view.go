@@ -88,6 +88,11 @@ func runView(config viewConfig) error {
 		return err
 	}
 
+	project, err := config.client.NewProject(canPrompt, owner, config.opts.number, true)
+	if err != nil {
+		return err
+	}
+
 	if config.opts.web {
 		config.opts.owner = owner.Login
 		url, err := buildURL(config)
@@ -99,11 +104,6 @@ func runView(config viewConfig) error {
 			return err
 		}
 		return nil
-	}
-
-	project, err := config.client.NewProject(canPrompt, owner, config.opts.number, true)
-	if err != nil {
-		return err
 	}
 
 	if config.opts.exporter != nil {
